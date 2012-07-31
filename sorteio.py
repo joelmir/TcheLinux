@@ -39,6 +39,9 @@ if (len(galera) != len(set(galera))):
 print "Uma vez sorteado, seu nome não será mostrado novamente.\n"
 print "Existem "+str(len(galera))+" pessoas na lista do sorteio! Bora lá?\n"
 
+#Embaralha a galera toda da lista
+random.shuffle(galera)
+
 while True:
 	# Prompt para sorteio
 	vaiMais = raw_input("Sortear mais um [s/n]? ")
@@ -49,14 +52,11 @@ while True:
 			print("\nVixi! Não existem mais pessoas para sortear!\n")
 			break
 		
-		# Sorteia um número entre 0 e len() da lista -1
-		numeroDaSorte = random.randint(0, len(galera)-1)
-		
-		# Nome do sorteado
-		print("-> E a pessoa sortuda é: "+galera[numeroDaSorte]+"\n")
+		# Nome do sorteado (ultima posição)
+		print("-> E a pessoa sortuda é: "+galera[-1]+"\n")
 		
 		# Remove o nome do sorteado da lista
-		jaSorteados.append(galera.pop(numeroDaSorte))
+		jaSorteados.append(galera.pop())
 		
 	else:
 		break
