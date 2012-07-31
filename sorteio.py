@@ -6,20 +6,15 @@
 # ------------------------------------------------------------------------- #
 # ------------------------------------------------------------------------- #
 
-import random, math, os
-
-# Limpa a tela
-os.system('clear')
-
-# Números que já foram sorteados
-jaSorteados = []
+import random
+import math
+import os
 
 # Nome do pessoal que vai participar do sorteio
 galera = [
 			'Fulaninho',
 			'Ciclaninho',
 			'Pedrinho',
-			
 			# Coloque seu nome aqui! :)
 		 ]
 
@@ -27,38 +22,32 @@ galera = [
 # ---------- Início da Rotina de Sorteio de Brindes do TcheLinux ---------- #
 # ------------------------------------------------------------------------- #
 
+# Limpa a tela
+os.system('clear')
+
 print "Seja bem vindo ao sorteio de brindes do TcheLinux"
 
 # Verifica nomes duplicados
-
 if (len(galera) != len(set(galera))):
-	print("\n-> ERRO! Algum(a) safadinho(a) se cadastrou duas vezes!\n")
+	print "\n-> ERRO! Algum(a) safadinho(a) se cadastrou duas vezes!\n"
 	exit()
-	
 
 print "Uma vez sorteado, seu nome não será mostrado novamente.\n"
-print "Existem "+str(len(galera))+" pessoas na lista do sorteio! Bora lá?\n"
+print "Existem {0} pessoas na lista do sorteio! Bora lá?\n".format(len(galera))
 
-#Embaralha a galera toda da lista
-random.shuffle(galera)
-
-while True:
+while galera:
 	# Prompt para sorteio
-	vaiMais = raw_input("Sortear mais um [s/n]? ")
-	
-	if vaiMais == "s":
-		# Ao esvaziar a lista, encerra o programa
-		if len(galera) < 1:
-			print("\nVixi! Não existem mais pessoas para sortear!\n")
-			break
-		
-		# Nome do sorteado (ultima posição)
-		print("-> E a pessoa sortuda é: "+galera[-1]+"\n")
-		
-		# Remove o nome do sorteado da lista
-		jaSorteados.append(galera.pop())
-		
-	else:
+	if raw_input("Sortear mais um [s/n]? ") != "s":
 		break
+
+	# Nome do sorteado
+	sorteado = random.choice(galera)
+	print "\n-> E a pessoa sortuda é: {0}\n".format(sorteado)
+	
+	# Tira da lista
+	galera.remove(sorteado)
 		
-print "\nFim do programa\n"
+# Se ao sair do loop a lista estiver vazia, avisa que não existe mais o que sortear
+if not galera:
+	print "Todas as pessoas já foram sorteadas."
+print "Sorteio finalizado"
